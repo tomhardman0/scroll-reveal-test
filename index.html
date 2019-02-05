@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+    <title>scroll test</title>
+    <style>
+
+      /* http://meyerweb.com/eric/tools/css/reset/ 
+        v2.0 | 20110126
+        License: none (public domain)
+      */
+
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed, 
+      figure, figcaption, footer, header, hgroup, 
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure, 
+      footer, header, hgroup, menu, nav, section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol, ul {
+        list-style: none;
+      }
+      blockquote, q {
+        quotes: none;
+      }
+      blockquote:before, blockquote:after,
+      q:before, q:after {
+        content: '';
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        font-size: 0;
+      }
+      
+      div {
+        width: 100%;
+        height: 100%;
+        font-size: 0;
+        z-index: 1;
+      }
+
+      div:nth-of-type(1n) {
+        background-color: cadetblue;
+      }
+
+      div:nth-of-type(2n) {
+        background-color:darkslategrey;
+      }
+
+      .reveal-cont {
+        height: 400px;
+        width: 100%;
+        overflow: hidden
+      }
+
+      .reveal {
+        height: 400px;
+        width: 100%;
+        background-image: url("img.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        transform: translateY(-100%);
+      }
+
+      h1 {
+        font-size: 100px;
+        text-align: center;
+        padding-top: 140px;
+        color: rgb(225, 0, 255);
+      }
+
+    </style>
+    </head>
+
+    <body>
+      <div></div>
+      <div></div>
+      <div class="reveal-cont">
+          <div class="reveal">
+
+              <h1>a good time</h1>
+      
+            </div>
+      </div>
+      
+      <div></div>
+      <div></div>
+    </body>
+
+    <script>
+      const revealCont = document.querySelector('.reveal-cont');
+      const revealMe = document.querySelector('.reveal');
+      const distanceToStart = revealCont.offsetTop - window.innerHeight;
+      const distanceToStop = distanceToStart + revealCont.clientHeight;
+
+      window.addEventListener('scroll', (e) => {
+        if (window.scrollY >= distanceToStart && window.scrollY < distanceToStop) {
+          const transformYPosition = revealMe.clientHeight - (window.scrollY - distanceToStart);
+          revealMe.style.transform = `translateY(${-transformYPosition}px)`
+        }
+
+        if (window.scrollY < distanceToStart) {
+          revealMe.style.transform = "translateY(-400px)";
+        }
+        if (window.scrollY > distanceToStop) {
+          revealMe.style.transform = "translateY(0px)";
+        }
+      })
+    </script>
+  </html>
